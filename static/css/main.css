@@ -216,8 +216,12 @@ blockquote {
 	text-align: left;
 } 
 
-#post-list li {
-	margin-bottom: 2em;
+#post-list .summary-post {
+	margin-bottom: 4em;
+}
+
+#post-list .summary-post a {
+	font-size: 1.25rem;
 }
 
 .post .title {

@@ -6,7 +6,7 @@
 
   <ul class="posts">
     {{ range where site.RegularPages "Section" "posts" }}
-    <li>
+    <li class="summary-post">
       <span>{{ .Date.Format "02 Jan 2006" }}</span> &raquo;
       <a href="{{ .Permalink }}">{{ .Title }}</a>
       <p>{{ .Summary }}</p>
