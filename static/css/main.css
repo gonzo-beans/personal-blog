@@ -88,6 +88,10 @@ h1 {
 	text-align: center;
 }
 
+h3 {
+	margin-top: ;
+}
+
 .site {
   font-size: 115%;
   text-align: justify;
@@ -184,7 +188,8 @@ blockquote {
 }
 
 .posts li {
-  line-height: 1.75em;
+  line-height: 1.25em;
+  margin-bottom: 1rem;
 }
 
 .posts span {
@@ -193,11 +198,14 @@ blockquote {
   font-size: 80%;
 }
 
+.post ul {
+  margin-bottom: 1rem;
+}
+
 /* The list items get ugly around these widths */
 @media (min-width: 46rem) and (max-width: 64rem) {
 	.posts li {
 		line-height: 1.25em;
-		margin-bottom: .5em;
 	}
 
   .posts span:after {
