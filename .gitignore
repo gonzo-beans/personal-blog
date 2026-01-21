@@ -1,5 +1,6 @@
 .claude
 .wrangler
+.env
 
 # Hugo
 /public/

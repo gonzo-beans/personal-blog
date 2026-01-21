@@ -4,7 +4,7 @@ title: 'I love the old man minimap in VS Code'
 url: /blog/35/
 ---
 
-If you don't use the minimap in VS code you probably turned it off a while ago (like me). I thought it was small and useless unless your code has a very distinct structure. But it it's mostly 
+If you don't use the minimap in VS code you probably turned it off a while ago (like me). I thought it was small and useless unless your code has a very distinct structure.
 
 It's kinda like sublime's minimap:
 
