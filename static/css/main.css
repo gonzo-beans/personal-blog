@@ -140,10 +140,10 @@ h3 {
 }
 
 .site {
-    font-size: 115%;
+    font-size: 17px;
     text-align: justify;
     width: 90%;
-    max-width: 64rem;
+    max-width: 80rem;
     margin: 3em auto 2em;
     line-height: 1.25rem;
     position: relative;
@@ -281,11 +281,12 @@ blockquote {
 
 .post .title {
     text-align: center;
+    margin-bottom: 2rem;
 }
 
 .post .title h1 {
     margin: 0 0;
-    margin-bottom: 0.1em;
+    margin-bottom: 0.5em;
 }
 
 .post .title p {
@@ -296,8 +297,8 @@ blockquote {
 .post pre {
     border: 1px solid #ddd;
     background-color: #eef;
-    padding: 0 0.4em;
-    margin: 24px 5%;
+    padding: 1rem;
+    margin: 2rem 5%;
     overflow: auto;
 }
 
@@ -315,7 +316,6 @@ blockquote {
 .post code {
     border: 1px solid #ddd;
     background-color: #eef;
-    padding: 0 0.2em;
 }
 
 .post pre code {
