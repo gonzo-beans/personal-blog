@@ -5,9 +5,9 @@ url: /blog/39
 tags: ['saas-launch']
 ---
 
-A totally unnecessary but cool change to my internal tools: realtime deploy lgos in my SaaS.
+A totally unnecessary but cool change to my internal tools: realtime deploy logs in my SaaS.
 
-Here's what it looks like:
+Here's a preview of what was implemented:
 
 <video controls class="">
     <source src="/videos/posts/39/wipa-analytics-pre-v1-deploy-demo_small.mp4">
@@ -16,11 +16,11 @@ Here's what it looks like:
 
 {{< toc >}}
 
-## Storage for deploy logs: a sqlite column.
+## Before the change. How logs are stored
 
-Each tenant's host is provisioned and configured by a single internal service. This one service keeps inside a sqlite DB the deploy history. The deployment logs are just stored as text in the sqlite db.
+Each tenant's host is provisioned and configured by a single internal service. This service has a Sqlite db with a table that tracks deployment history. Each row is a deployment and tracks the configuration for the deployment, the host, etc. The deployment logs are also stored in this table as a text column.
 
-We only write the deployment logs to stdout and to the db when it's all finished. Writing it out to stdout all at once is key to prevent multiple deploys from getting mixed up in the internal service's logs. 
+As the deploy progresses, we store the logs in a buffer. We flush this buffer stdout and to the Sqlite db once the deploy is finished. **This is a deliberate choice.** Concurrent deployments would be hard to follow if we incrementally flushed these logs to stdout. The internal service's logs would have deployments that interspersed with one another!
 
 However, this also means that we can't query the database for an in-progress deployment. When a deployment takes more than a minute, it would be nice to see its progress.
 
@@ -34,7 +34,7 @@ We might be pre-optimizing here, but we could flush to the DB only the bits that
 UPDATE deployments SET logs = logs || ? WHERE deployment_id = ?
 ```
 
-We can wrap the buffer we write to with a small struct that tracks the offset since the last flush.
+We can wrap the logs buffer in a small struct that tracks the offset since the last flush.
 
 ```go
 package deploy

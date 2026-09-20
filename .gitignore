@@ -5,6 +5,7 @@
 # Hugo
 /public/
 /resources/_gen/
+/assets/pikchr/
 .hugo_build.lock
 
 # Migration script

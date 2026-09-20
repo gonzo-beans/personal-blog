@@ -354,6 +354,7 @@ blockquote {
     background-color: #eef;
     padding: 1rem;
     overflow: auto;
+    margin-bottom: 4rem;
 }
 
 @media (max-width: 767px) {
@@ -402,6 +403,18 @@ video {
     display: block;
     max-width: 100%;
     margin: 0 auto;
+}
+
+.post .pikchr {
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    text-align: center;
+}
+
+.post .pikchr svg {
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
 }
 
 .recents .title {

@@ -1,12 +1,15 @@
 set windows-shell := ['nu', '-c']
 
-build:
+pikchr:
+    go run ./cmd/pikchrgen
+
+build: pikchr
     hugo build
 
 deploy: build
     bunx wrangler pages deploy
 
-watch:
+watch: pikchr
     hugo server --watch --port 12000
 
 new-typst title:

@@ -1,0 +1,11 @@
+{{- $id := index .Attributes "id" -}}
+{{- if not $id -}}
+    {{ errorf "Pikchr code block is missing an id at %s" .Position }}
+{{- end -}}
+{{- $svg := resources.Get (printf "pikchr/%s.svg" $id) -}}
+{{- if not $svg -}}
+    {{ errorf "Missing generated Pikchr SVG for id %q" $id }}
+{{- end -}}
+<figure class="pikchr" id="{{ $id }}">
+    {{ $svg.Content | safeHTML }}
+</figure>
