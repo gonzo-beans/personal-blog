@@ -74,10 +74,10 @@ I now have a declarative approach to defining load tests with virtual users that
 
 In 2 seconds we have some very rich test data to play with.
 
-![Screenshot of the analytics page after running otelgen](/img/posts/39/wip-analytics-post-otelgen-vm-analytics-screenshot.png)
+![Screenshot of the analytics page after running otelgen](/img/posts/38/wip-analytics-post-otelgen-vm-analytics-screenshot.png)
 
 Also in the logs
-![Screenshot of the logs page after running otelgen](/img/posts/39/wip-analytics-post-otelgen-vm-logs-screenshot.png)
+![Screenshot of the logs page after running otelgen](/img/posts/38/wip-analytics-post-otelgen-vm-logs-screenshot.png)
 
 The last weird trick is the developing experience in the SaaS client's portal. The two screenshots above come from that portal.
 

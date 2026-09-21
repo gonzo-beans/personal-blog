@@ -6,6 +6,10 @@
 {{- if not $svg -}}
     {{ errorf "Missing generated Pikchr SVG for id %q" $id }}
 {{- end -}}
-<figure class="pikchr" id="{{ $id }}">
-    {{ $svg.Content | safeHTML }}
-</figure>
+<details class="pikchr" id="{{ $id }}">
+    <summary aria-label="Show Pikchr source">
+        {{ $svg.Content | safeHTML }}
+        <span class="pikchr-caption">Click to see the code</span>
+    </summary>
+    <pre><code>{{ .Inner }}</code></pre>
+</details>

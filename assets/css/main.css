@@ -405,16 +405,35 @@ video {
     margin: 0 auto;
 }
 
-.post .pikchr {
+.post details.pikchr {
     margin: 1.5rem 0;
     overflow-x: auto;
+}
+
+.post details.pikchr summary {
+    cursor: pointer;
+    list-style: none;
     text-align: center;
 }
 
-.post .pikchr svg {
+.post details.pikchr summary::-webkit-details-marker {
+    display: none;
+}
+
+.post details.pikchr summary svg {
     display: inline-block;
     max-width: 100%;
     height: auto;
+}
+
+.post details.pikchr .pikchr-caption {
+    display: block;
+    font-style: italic;
+    text-align: center;
+}
+
+.post details.pikchr pre {
+    text-align: left;
 }
 
 .recents .title {
