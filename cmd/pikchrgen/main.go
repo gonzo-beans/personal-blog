@@ -2,6 +2,8 @@
 package main
 
 import (
+	"bytes"
+	"flag"
 	"fmt"
 	"io/fs"
 	"os"
@@ -23,9 +25,18 @@ type diagram struct {
 }
 
 func main() {
+	watch := flag.Bool("watch", false, "watch content Markdown files and regenerate Pikchr SVGs")
+	flag.Parse()
+
 	contentDir := "content"
 	assetDir := filepath.Join("assets", "pikchr")
-	if err := generate(contentDir, assetDir); err != nil {
+	var err error
+	if *watch {
+		err = watchContent(contentDir, assetDir)
+	} else {
+		err = generate(contentDir, assetDir)
+	}
+	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)
 	}
@@ -64,6 +75,15 @@ func generate(contentDir, assetDir string) error {
 		return err
 	}
 
+	generated := make(map[string][]byte, len(diagrams))
+	for _, d := range diagrams {
+		svg, _, _, err := gopikchr.Convert(d.source, gopikchr.WithSVGClass("pikchr"))
+		if err != nil {
+			return fmt.Errorf("%s:%d: Pikchr conversion failed: %w\n%s", d.file, d.line, err, svg)
+		}
+		generated[d.id+".svg"] = []byte(svg)
+	}
+
 	if err := os.MkdirAll(assetDir, 0755); err != nil {
 		return err
 	}
@@ -71,21 +91,27 @@ func generate(contentDir, assetDir string) error {
 	if err != nil {
 		return err
 	}
+	for filename, svg := range generated {
+		path := filepath.Join(assetDir, filename)
+		current, err := os.ReadFile(path)
+		if err == nil && bytes.Equal(current, svg) {
+			continue
+		}
+		if err != nil && !os.IsNotExist(err) {
+			return err
+		}
+		if err := os.WriteFile(path, svg, 0644); err != nil {
+			return err
+		}
+	}
 	for _, entry := range entries {
-		if !entry.IsDir() && strings.EqualFold(filepath.Ext(entry.Name()), ".svg") {
+		if entry.IsDir() || !strings.EqualFold(filepath.Ext(entry.Name()), ".svg") {
+			continue
+		}
+		if _, ok := generated[entry.Name()]; !ok {
 			if err := os.Remove(filepath.Join(assetDir, entry.Name())); err != nil {
 				return err
 			}
-		}
-	}
-
-	for _, d := range diagrams {
-		svg, _, _, err := gopikchr.Convert(d.source, gopikchr.WithSVGClass("pikchr"))
-		if err != nil {
-			return fmt.Errorf("%s:%d: Pikchr conversion failed: %w\n%s", d.file, d.line, err, svg)
-		}
-		if err := os.WriteFile(filepath.Join(assetDir, d.id+".svg"), []byte(svg), 0644); err != nil {
-			return err
 		}
 	}
 

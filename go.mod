@@ -75,7 +75,7 @@ require (
 	github.com/fatih/color v1.18.0 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
 	github.com/frankban/quicktest v1.14.6 // indirect
-	github.com/fsnotify/fsnotify v1.9.0 // indirect
+	github.com/fsnotify/fsnotify v1.9.0
 	github.com/getkin/kin-openapi v0.132.0 // indirect
 	github.com/ghodss/yaml v1.0.0 // indirect
 	github.com/go-jose/go-jose/v4 v4.0.5 // indirect
